@@ -131,6 +131,9 @@ class AutoRegisterRouts
             $method = $methodAnnotation['method'];
         }
         if (empty($methodAnnotation['url'])) {
+            if ($config['auto_url']['not_parse']??false) {
+                return false;
+            }
             $url = ParseApiDetail::autoCreateUrl($refClass->name,$refMethod->name,$config);
         }else{
             $url = $methodAnnotation['url'];
@@ -150,5 +153,6 @@ class AutoRegisterRouts
         return $data;
 
     }
+
 
 }
